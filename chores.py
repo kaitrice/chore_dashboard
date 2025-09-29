@@ -7,7 +7,7 @@ FILE_PATH = 'chores.json'
 def init_chores():
     conn = get_conn()
     cursor = conn.cursor()
-    cursor.execute('DROP TABLE IF EXISTS CHORES')
+    cursor.execute('DROP TABLE IF EXISTS CHORES;')
 
     query = """
         CREATE TABLE CHORES (
@@ -19,7 +19,7 @@ def init_chores():
     """
     cursor.execute(query)
 
-    print("~ Table initiated")
+    print("~ Chores Table initiated")
 
 def insert_chore(name, freq, groupId, score):
     conn = get_conn()
@@ -40,8 +40,7 @@ def get_all_chores():
         ORDER BY groupId
     """
     cursor.execute(query)
-    rows = cursor.fetchall()
-    return rows
+    return cursor.fetchall()
 
 def seed_chores():
     with open(FILE_PATH, 'r') as f:
