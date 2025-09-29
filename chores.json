@@ -1,0 +1,33 @@
+{
+    "weekly": {
+        "1": [
+            "Vacuum/Mop",
+            "Clean Bathroom (toilet, counters sink, mirror)",
+            "Take out recycling"
+        ],
+        "2": [
+            "Dust surfaces",
+            "Clean Kitchen (counters, sink)",
+            "Take out trash",
+            "Wipe down windows / glass surfaces in shared areas"
+        ]
+    },
+    "monthly": {
+        "1": [
+            "Declutter living/dining area",
+            "Declutter fridge/freezer"
+        ],
+        "2": [
+            "Clean baseboards & doors",
+            "Declutter fridge/freezer"
+        ]
+    },
+    "biyearly": {
+        "1": [
+            "Shampoo carpets"
+        ],
+        "2": [
+            "Clean Kitchen appliances (oven, microwave, fridge)"
+        ]
+    }
+}
