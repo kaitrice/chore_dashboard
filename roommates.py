@@ -31,7 +31,7 @@ def insert_roommate(name):
     except sqlite3.IntegrityError:
         print(f"Error: Chore named '{name}' already exists.")
 
-def list_roommates():
+def get_roommates():
     conn = get_conn()
     cursor = conn.cursor()
     query = """
@@ -39,6 +39,16 @@ def list_roommates():
     """
     cursor.execute(query)
     return cursor.fetchall()
+
+def get_roommate(roommate_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        SELECT * FROM roommates 
+        WHERE ID = ?
+    """
+    cursor.execute(query, (roommate_id,))
+    return cursor.fetchone()
 
 def seed_roommates():
     insert_roommate('Kait')

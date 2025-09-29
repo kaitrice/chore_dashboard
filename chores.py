@@ -34,15 +34,24 @@ def insert_chore(name, freq, roommate_id, score):
     except sqlite3.IntegrityError:
         print(f"Error: Chore named '{name}' already exists.")
 
-def list_chores():
+def get_chores():
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        SELECT * FROM chores
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+def get_chore(chore_id):
     conn = get_conn()
     cursor = conn.cursor()
     query = """
         SELECT * FROM chores 
-        ORDER BY roommate_id
+        WHERE ID = ?
     """
-    cursor.execute(query)
-    return cursor.fetchall()
+    cursor.execute(query, (chore_id,))
+    return cursor.fetchone()
 
 def seed_chores():
     with open(FILE_PATH, 'r') as f:
@@ -105,13 +114,3 @@ def rotate_chores():
 
     conn.commit()
     conn.close()
-
-def get_chore(chore_id):
-    conn = get_conn()
-    cursor = conn.cursor()
-    query = """
-        SELECT * FROM chores 
-        WHERE ID = ?
-    """
-    cursor.execute(query, (chore_id,))
-    return cursor.fetchone()
