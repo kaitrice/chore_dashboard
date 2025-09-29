@@ -5,7 +5,7 @@ from db import get_conn
 def init_roommates():
     conn = get_conn()
     cursor = conn.cursor()
-    cursor.execute('DROP TABLE IF EXISTS roommates;')
+    cursor.execute('DROP TABLE IF EXISTS Roommates;')
 
     query = """
         CREATE TABLE roommates (
