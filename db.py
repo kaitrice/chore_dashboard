@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_PATH = 'data/chores.db'
+DB_PATH = 'data/database.db'
 
 def get_conn():
     return sqlite3.connect(DB_PATH)
