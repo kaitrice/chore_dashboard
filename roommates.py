@@ -53,9 +53,8 @@ def complete_chore_for_roommate(chore_id, roommate_id):
         print("~ No data found")
         return
     
-    score = row
+    score = row[3]
     update_score(roommate_id, score)
-
 
 def update_score(roommate_id, score):
     conn = get_conn()

@@ -64,7 +64,7 @@ def complete_chore(chore_id):
         SET isComplete = TRUE
         WHERE ID = ?
     """
-    cursor.execute(query, (chore_id,))
+    cursor.execute(query, (chore_id, ))
     conn.commit()
     conn.close()
 
@@ -113,5 +113,5 @@ def get_chore(chore_id):
         SELECT * FROM chores 
         WHERE ID = ?
     """
-    cursor.execute(query, chore_id)
-    return cursor.fetchall()
+    cursor.execute(query, (chore_id,))
+    return cursor.fetchone()
