@@ -11,10 +11,12 @@ def init_chores():
 
     query = """
         CREATE TABLE CHORES (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT,
             Name VARCHAR(255) NOT NULL,
             Frequency VARCHAR(255) NOT NULL,
             GroupId INT NOT NULL,
-            Score INT
+            Score INT,
+            isComplete BOOLEAN
         );
     """
     cursor.execute(query)
@@ -25,8 +27,8 @@ def insert_chore(name, freq, groupId, score):
     conn = get_conn()
     cursor = conn.cursor()
     try:
-        query = "INSERT INTO chores (name, frequency, groupId, score) VALUES (?, ?, ?, ?)"
-        cursor.execute(query, (name, freq, groupId, score))
+        query = "INSERT INTO chores (name, frequency, groupId, score, isComplete) VALUES (?, ?, ?, ?, ?)"
+        cursor.execute(query, (name, freq, groupId, score, False))
         conn.commit()
         print(f"Chore '{name}' added successfully.")
     except sqlite3.IntegrityError:
@@ -53,3 +55,15 @@ def seed_chores():
                 insert_chore(chore, frequency, group_id, 0)
 
     print('~ Chores seeded')
+
+def complete_chore(chore_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        UPDATE Chores 
+        SET isComplete = TRUE
+        WHERE ID = ?
+    """
+    cursor.execute(query, (chore_id,))
+    conn.commit()
+    conn.close()
