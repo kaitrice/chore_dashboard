@@ -67,3 +67,41 @@ def complete_chore(chore_id):
     cursor.execute(query, (chore_id,))
     conn.commit()
     conn.close()
+
+def reset_all_chores():
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        UPDATE Chores 
+        SET isComplete = FALSE
+    """
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
+
+def rotate_chores():
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        UPDATE Chores 
+        SET roommateId = -1
+        WHERE roommateId = 1
+    """
+    cursor.execute(query)
+
+    query = """
+        UPDATE Chores 
+        SET roommateId = 1
+        WHERE roommateId = 2
+    """
+    cursor.execute(query)
+
+    query = """
+        UPDATE Chores 
+        SET roommateId = 2
+        WHERE roommateId = -1
+    """
+    cursor.execute(query)
+
+    conn.commit()
+    conn.close()

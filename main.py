@@ -1,4 +1,4 @@
-from chores import complete_chore, get_all_chores, init_chores, seed_chores
+from chores import complete_chore, get_all_chores, init_chores, reset_all_chores, rotate_chores, seed_chores
 from db import get_all
 from roommates import get_all_roommates, init_roommates, seed_roommates
 
@@ -51,7 +51,14 @@ def print_all():
 # print_all_roommates()
 print_all()
 
-complete_chore(2)
 print('\n\n')
+complete_chore(2)
 print_all()
 
+print('\n\n')
+reset_all_chores()
+print_all()
+
+print('\n\n')
+rotate_chores()
+print_all()
