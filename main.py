@@ -1,4 +1,5 @@
-from chores import get_all_chores, init_chores, seed_chores
+from chores import complete_chore, get_all_chores, init_chores, seed_chores
+from db import get_all
 from roommates import get_all_roommates, init_roommates, seed_roommates
 
 init_chores()
@@ -33,7 +34,24 @@ def print_all_roommates():
         name, group_id, score = row
         print(f"{name} [Group {group_id}] | Score: {score}")
 
-print("---  Chore Dashboard  ---")
+def print_all():
+    rows = get_all()
 
-print_all_chores()
-print_all_roommates()
+    if not rows:
+        print("~ No data found")
+        return
+
+    print("---  Chore Dashboard  ---")
+    for row in rows:
+        chore, roommate, isComplete = row
+        print(f"{roommate} | {chore} {isComplete}")
+
+
+# print_all_chores()
+# print_all_roommates()
+print_all()
+
+complete_chore(2)
+print('\n\n')
+print_all()
+
