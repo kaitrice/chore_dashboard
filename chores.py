@@ -7,7 +7,7 @@ FILE_PATH = 'chores.json'
 def init_chores():
     conn = get_conn()
     cursor = conn.cursor()
-    cursor.execute('DROP TABLE IF EXISTS CHORES;')
+    cursor.execute('DROP TABLE IF EXISTS Chores;')
 
     query = """
         CREATE TABLE CHORES (
