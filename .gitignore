@@ -32,5 +32,5 @@ htmlcov/
 config.ini
 .env
 
-# Data files
-data
+# Database files
+database.db
