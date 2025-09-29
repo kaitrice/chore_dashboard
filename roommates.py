@@ -9,8 +9,8 @@ def init_roommates():
 
     query = """
         CREATE TABLE roommates (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT,
             Name VARCHAR(255) NOT NULL,
-            groupId INT NOT NULL,
             Score INT
         );
     """
@@ -19,12 +19,12 @@ def init_roommates():
 
     print("~ Roommates Table initiated")
 
-def insert_roommate(name, groupId):
+def insert_roommate(name):
     conn = get_conn()
     cursor = conn.cursor()
     try:
-        query = "INSERT INTO roommates (name, groupId, score) VALUES (?, ?, 0)"
-        cursor.execute(query, (name, groupId))
+        query = "INSERT INTO roommates (name, score) VALUES (?, ?)"
+        cursor.execute(query, (name, 0))
         conn.commit()
         print(f"'{name}' added successfully.")
     except sqlite3.IntegrityError:
@@ -34,13 +34,12 @@ def get_all_roommates():
     conn = get_conn()
     cursor = conn.cursor()
     query = """
-        SELECT * FROM roommates 
-        ORDER BY groupId
+        SELECT * FROM roommates
     """
     cursor.execute(query)
     return cursor.fetchall()
 
 def seed_roommates():
-    insert_roommate('Kait', 1)
-    insert_roommate('Zoe', 2)
+    insert_roommate('Kait')
+    insert_roommate('Zoe')
     print('~ Roommates seeded')

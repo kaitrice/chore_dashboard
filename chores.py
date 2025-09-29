@@ -14,7 +14,7 @@ def init_chores():
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
             Name VARCHAR(255) NOT NULL,
             Frequency VARCHAR(255) NOT NULL,
-            GroupId INT NOT NULL,
+            RoommateId INT NOT NULL,
             Score INT,
             isComplete BOOLEAN
         );
@@ -23,12 +23,12 @@ def init_chores():
 
     print("~ Chores Table initiated")
 
-def insert_chore(name, freq, groupId, score):
+def insert_chore(name, freq, roommate_id, score):
     conn = get_conn()
     cursor = conn.cursor()
     try:
-        query = "INSERT INTO chores (name, frequency, groupId, score, isComplete) VALUES (?, ?, ?, ?, ?)"
-        cursor.execute(query, (name, freq, groupId, score, False))
+        query = "INSERT INTO chores (name, frequency, roommateId, score, isComplete) VALUES (?, ?, ?, ?, ?)"
+        cursor.execute(query, (name, freq, roommate_id, score, False))
         conn.commit()
         print(f"Chore '{name}' added successfully.")
     except sqlite3.IntegrityError:
@@ -39,7 +39,7 @@ def get_all_chores():
     cursor = conn.cursor()
     query = """
         SELECT * FROM chores 
-        ORDER BY groupId
+        ORDER BY roommate_id
     """
     cursor.execute(query)
     return cursor.fetchall()
@@ -48,11 +48,11 @@ def seed_chores():
     with open(FILE_PATH, 'r') as f:
         data = json.load(f)
 
-    for frequency, groups in data.items():
-        for group, chores in groups.items():
-            group_id = int(group)
+    for frequency, roommates in data.items():
+        for roommate, chores in roommates.items():
+            roommate_id = int(roommate)
             for chore in chores:
-                insert_chore(chore, frequency, group_id, 0)
+                insert_chore(chore, frequency, roommate_id, 0)
 
     print('~ Chores seeded')
 

@@ -17,7 +17,7 @@ def get_all():
     query = """
         SELECT chores.name as Chore, roommates.name as Roommate, isComplete
         FROM Chores
-        JOIN Roommate ON chores.groupId = roommates.groupId
+        JOIN Roommates ON chores.roommateId = roommates.id
         ORDER BY roommate
     """
     cursor.execute(query)
