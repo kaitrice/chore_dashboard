@@ -9,13 +9,13 @@ def close_connection():
     conn = get_conn()
     if conn:
         conn.close()
-        print('~ Database connection closed\n')
+        print('~ DB connection closed\n')
 
 def get_all():
     conn = get_conn()
     cursor = conn.cursor()
     query = """
-        SELECT chores.name as Chore, roommates.name as Roommate, isComplete
+        SELECT chores.name as Chore, roommates.name as Roommate, isComplete, roommates.score as Score
         FROM Chores
         JOIN Roommates ON chores.roommateId = roommates.id
         ORDER BY roommate

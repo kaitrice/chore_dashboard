@@ -30,11 +30,11 @@ def insert_chore(name, freq, roommate_id, score):
         query = "INSERT INTO chores (name, frequency, roommateId, score, isComplete) VALUES (?, ?, ?, ?, ?)"
         cursor.execute(query, (name, freq, roommate_id, score, False))
         conn.commit()
-        print(f"Chore '{name}' added successfully.")
+        # print(f"Chore '{name}' added successfully.")
     except sqlite3.IntegrityError:
         print(f"Error: Chore named '{name}' already exists.")
 
-def get_all_chores():
+def list_chores():
     conn = get_conn()
     cursor = conn.cursor()
     query = """
@@ -105,3 +105,13 @@ def rotate_chores():
 
     conn.commit()
     conn.close()
+
+def get_chore(chore_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        SELECT * FROM chores 
+        WHERE ID = ?
+    """
+    cursor.execute(query, chore_id)
+    return cursor.fetchall()
