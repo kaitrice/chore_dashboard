@@ -11,6 +11,18 @@ def close_connection():
         conn.close()
         print('~ Database connection closed\n')
 
+def get_all():
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = """
+        SELECT chores.name as Chore, roommates.name as Roommate, isComplete
+        FROM Chores
+        JOIN Roommate ON chores.groupId = roommates.groupId
+        ORDER BY roommate
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
 try:
     conn = get_conn()
     print("\n~ DB initiated")
