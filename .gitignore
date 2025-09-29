@@ -1,0 +1,36 @@
+# Byte-code files
+*.pyc
+__pycache__/
+*.pyd
+*.so
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*.bak
+
+# OS generated files
+.DS_Store
+
+# Test and coverage files
+.coverage
+.tox/
+htmlcov/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Configuration files (if sensitive or environment-specific)
+config.ini
+.env
+
+# Data files
+data
